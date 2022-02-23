@@ -4,6 +4,7 @@ import com.kkssbbb.blogs.model.RoleType;
 import com.kkssbbb.blogs.model.User;
 import com.kkssbbb.blogs.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,7 +23,18 @@ public class DummyControllerTest {
 
     //save 함수는 id를 전달하지 않으면 insert를 하고 , id를 전달하면 해당 id에 대한 데이터가있으면 update를 하며,
     //id에 대한 데이터가 없으면 insert를 한다.
-    @Transactional //더티체킹
+
+   @DeleteMapping("/dummy/user/{id}")
+    public String delete(@PathVariable int id) {
+       try {
+           userRepository.deleteById(id);
+       } catch (Exception e) {
+       return "삭제에 실패하였습니다. 아이디를 확인해 주세요";
+       }
+           return "삭제되었습니다." + id;
+       }
+
+    @Transactional //더티체킹 ,함수 종료시 자동commit
     @PutMapping("/dummy/user/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User requestUser){
         System.out.println("아이디 : "+id);
