@@ -8,7 +8,7 @@ public class BoardController {
 
     @GetMapping({"","/"})
     public String index(){
-          //   /WEB-INF/views/index.bustache
+          //   /WEB-INF/views/user.bustache
         return "index";
     }
 }

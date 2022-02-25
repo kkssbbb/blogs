@@ -1,7 +1,8 @@
 
 {{>layout/header}}  <!--layout폴더의 header 머스테치 파일을 포함한다.라는 뜻-->
 
-<form action="/action_page.php">
+<div className="container">
+<form>
     <div class="form-group">
         <label for="username">UserName:</label>
         <input type="username" class="form-control" placeholder="Enter username" id="username">
@@ -17,8 +18,10 @@
         <input type="password" class="form-control" placeholder="Enter password" id="password">
     </div>
 
-
-    <button type="submit" class="btn btn-primary">회원가입</button>
 </form>
+    <button id="btn-save" type="submit" class="btn btn-primary">회원가입</button>
+</div>
+<!--user.js 참조-->
+<script src="/blog/js/user/user.js"></script>
 
 {{>layout/footer}}
