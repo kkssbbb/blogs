@@ -15,14 +15,8 @@ public class UserService {
 
 
     @Transactional // : 1트랜잭션 관리, 2서비스 의미 때문 :ex 한번에 두개의 트랜잭션션을 관할 수 있다
-    public int 회원가입(User user){
-        try {
-            userRepository.save(user);
-            return 1;
-        }catch(Exception e){
-            e.printStackTrace();
-            System.out.println("UserService: 회원가입(): "+e.getMessage());
-        }
-        return -1;
+    public void 회원가입(User user) {
+        userRepository.save(user);
     }
-}
+    }
+
