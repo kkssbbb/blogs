@@ -15,19 +15,29 @@
 <body>
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <a class="navbar-brand" href="/blog">KSB Blog</a>
+    <a class="navbar-brand" href="/">KSB Blog</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
     </button>
+
+
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+        {{^principal}}
         <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/blog/user/loginForm">로그인</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/blog/user/joinForm">회원가입</a>
-            </li>
+            <li class="nav-item"><a class="nav-link" href="/loginForm">로그인</a></li>
+            <li class="nav-item"><a class="nav-link" href="/joinForm">회원가입</a></li>
         </ul>
+        {{/principal}}
+
+        {{#principal}}
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/board/form">글쓰기</a></li>
+                <li class="nav-item"><a class="nav-link" href="/user/form">회원정보</a></li>
+                <li class="nav-item"><a class="nav-link" href="/logout">로그아웃</a></li>
+            </ul>
+        {{/principal}}
+
     </div>
 </nav>
 <br>
