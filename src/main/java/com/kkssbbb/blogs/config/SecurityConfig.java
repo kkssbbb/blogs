@@ -1,10 +1,12 @@
 package com.kkssbbb.blogs.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 @Configuration// 빈등록: 스프링 컨테이너에서 객체를 관리할 수 있게 한다.
@@ -13,10 +15,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 //우 세개 어노테이션은 시큐리티 에서 세트 어노테이션
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Bean //Ioc
+    public BCryptPasswordEncoder encoderPWD(){
+        return new BCryptPasswordEncoder();
+    }
+
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/auth/**")
+
+        http
+                .csrf().disable() //csrf토큰 비활성화 (테스트시 걸어두는게 좋음)
+                .authorizeRequests()
+                .antMatchers("/auth/**" ,"/js/**" ,"/css/**","/image/**","/")
                 .permitAll()//auth/이하는 누구나 들어올수 있다.
                 .anyRequest() //다른요청은
                 .authenticated() //인증이 되야한다.

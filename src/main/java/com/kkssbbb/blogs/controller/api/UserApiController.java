@@ -6,6 +6,7 @@ import com.kkssbbb.blogs.model.User;
 import com.kkssbbb.blogs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -16,11 +17,12 @@ public class UserApiController {
     @Autowired
     private UserService userService;
 
+
     @PostMapping("/auth/joinProc")
-    public ResponseDto<Integer> save(@RequestBody User user) {
+    public ResponseDto<Integer> save(@RequestBody User user) { //username, password , email
         System.out.println("User ApiController : save호출됨 ");
 
-        user.setRole(RoleType.USER);
+
         userService.회원가입(user);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 
