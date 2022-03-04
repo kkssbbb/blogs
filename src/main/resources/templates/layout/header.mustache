@@ -1,5 +1,6 @@
 
-<!DOCTYPE html>
+
+
 <html lang="en">
 <head>
     <title>FirstBlog</title>
@@ -13,6 +14,7 @@
 
 </head>
 <body>
+${principal}
 
 <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" href="/">KSB Blog</a>
@@ -25,8 +27,8 @@
 
         {{^principal}}
         <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="/loginForm">로그인</a></li>
-            <li class="nav-item"><a class="nav-link" href="/joinForm">회원가입</a></li>
+            <li class="nav-item"><a class="nav-link" href="/auth/loginForm">로그인</a></li>
+            <li class="nav-item"><a class="nav-link" href="/auth/joinForm">회원가입</a></li>
         </ul>
         {{/principal}}
 
