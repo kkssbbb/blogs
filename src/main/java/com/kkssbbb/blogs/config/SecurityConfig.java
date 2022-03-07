@@ -1,7 +1,11 @@
 package com.kkssbbb.blogs.config;
 
+import com.kkssbbb.blogs.config.auth.PrincipalDetail;
+import com.kkssbbb.blogs.config.auth.PrincipalDetailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,11 +19,24 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //우 세개 어노테이션은 시큐리티 에서 세트 어노테이션
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+     private PrincipalDetailService principalDetailService;
+
     @Bean //Ioc
     public BCryptPasswordEncoder encoderPWD(){
         return new BCryptPasswordEncoder();
     }
 
+    //시큐리티가 대신 로그인 해주는데 password를 가로채기를 하는데
+    //해당 password가 뭘로 해쉬가 되어 회원가입이 되었는지 알아야
+    // 같은 해쉬로 암호화해서 db에 있는 해쉬랑 비교할 수 있음
+
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(principalDetailService).passwordEncoder(encoderPWD());
+
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
