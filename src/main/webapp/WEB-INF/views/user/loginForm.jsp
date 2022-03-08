@@ -1,5 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-{{>layout/header}}  <!--layout폴더의 header 머스테치 파일을 포함한다.라는 뜻-->
+<%@ include file="../layout/header.jsp"%>  <!--layout폴더의 header 머스테치 파일을 포함한다.라는 뜻-->
 
 <div class = "container">
 <form action="/auth/loginProc" method="post">
@@ -23,4 +24,5 @@
 </div>
 
 <script src="/js/user/user.js"></script>
-{{>layout/footer}}
+
+<%@ include file="../layout/footer.jsp"%>
