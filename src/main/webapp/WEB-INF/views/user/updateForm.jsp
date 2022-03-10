@@ -2,9 +2,8 @@
 
 <%@ include file="../layout/header.jsp"%>  <!--layout폴더의 header 머스테치 파일을 포함한다.라는 뜻-->
 
-<div class="container">
-    글쓰기화면
+<div>
+    test
 </div>
-
 
 <%@ include file="../layout/footer.jsp"%>

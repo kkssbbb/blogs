@@ -10,12 +10,12 @@ server:
       force: true
 
 spring:
-  mustache:
-    expose-session-attributes: true # 모든 session attribute를 template에 병합하기 전 포함시켜야하는 지 여부
+
   mvc:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul #DB연결정보 설정

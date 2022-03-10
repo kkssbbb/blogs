@@ -2,6 +2,7 @@ plugins {
     id 'org.springframework.boot' version '2.6.3'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
+    id 'war'
 }
 
 group = 'com.kkssbbb'
@@ -33,8 +34,8 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
 
     // 기본적으로 스프링부트는 내장톰캣을 가지고 있지만 ,jsp 엔진이 존재하지 않기 때문에 jasper와 jsp의 라이브러리 jstl을 사용할 수 있는 의존성을 추가해 줘야한다.
-    implementation 'javax.servlet:jstl'
-    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+    implementation ('javax.servlet:jstl')
+    implementation ('org.apache.tomcat.embed:tomcat-embed-jasper')
 // 머스테치
    // implementation('org.springframework.boot:spring-boot-starter-mustache')
 }
