@@ -9,6 +9,7 @@ import com.kkssbbb.blogs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,6 +32,13 @@ public class BoardApiController {
     boardService.글삭제하기(id);
     return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
+
+    @PutMapping("/api/board/{id}")  //deleteById 와 주소가 같지만 맵핑 메서드가 다르기때문에 괜찮다.
+    public ResponseDto<Integer> update(@PathVariable int id, @RequestBody Board board){
+    boardService.글수정하기(id,board);
+    return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+    }
+
 }
 
 
