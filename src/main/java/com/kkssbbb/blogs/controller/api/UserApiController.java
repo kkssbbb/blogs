@@ -28,6 +28,14 @@ public class UserApiController {
 
     }
 
+    @PutMapping("/user")
+        public ResponseDto<Integer> update(@RequestBody User user){
+        userService.회원수정(user);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+        }
+
+    }
+
 
 
 //    @PostMapping("/api/user/login")
