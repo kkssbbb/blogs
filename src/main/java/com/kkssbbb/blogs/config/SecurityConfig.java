@@ -5,6 +5,7 @@ import com.kkssbbb.blogs.config.auth.PrincipalDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true) //특정 주소로 접근을 하면 권한 밎 인증을 미리 체크하겠다는 뜻.
 //우 세개 어노테이션은 시큐리티 에서 세트 어노테이션
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception{
+        return super.authenticationManagerBean();
+    }
 
     @Autowired
      private PrincipalDetailService principalDetailService;

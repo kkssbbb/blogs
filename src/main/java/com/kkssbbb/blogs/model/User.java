@@ -4,11 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.sql.Timestamp;
 
 
@@ -17,6 +16,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 @Entity  //User클래스가 MySQL에 자동으로 테이블생성을 하게 해준다.
+
 //@DynamicInsert : insert시에 null인 필드를 제외시켜준다.
 public class User {
 

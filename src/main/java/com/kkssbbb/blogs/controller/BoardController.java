@@ -2,6 +2,8 @@ package com.kkssbbb.blogs.controller;
 
 import com.kkssbbb.blogs.config.auth.PrincipalDetail;
 import com.kkssbbb.blogs.service.BoardService;
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -19,10 +21,11 @@ public class BoardController {
     @Autowired
     private BoardService boardService;
 
+    @NotFound(action = NotFoundAction.IGNORE)
     @GetMapping({"","/"})
     public String index(Model model, @PageableDefault(size = 3, sort = "id", direction = Sort.Direction.DESC)Pageable pageable){
         model.addAttribute("boards",boardService.글목록(pageable));
-          //   /WEB-INF/views/user.bustache
+        //   /WEB-INF/views/user.bustache
         //System.out.println("로그인 사용자 아이디"+principal.getUsername());
         return "index"; //viewResolver 적용 앞 뒤로 prefix,suffix를 붙여준다.
     }

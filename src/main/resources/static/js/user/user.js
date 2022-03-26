@@ -5,7 +5,7 @@ let index={
             this.save();
         });
         $("#btn-update").on("click", () =>{ /*.on("click",여기 엔 이러나는 이벤트*/
-            this.save();
+            this.update();
         });
 
     },
