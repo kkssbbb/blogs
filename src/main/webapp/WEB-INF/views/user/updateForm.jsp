@@ -4,7 +4,7 @@
 
 <div className="container">
     <form>
-        <input type="hidden" id="id" value=${principal.user.id}/>
+        <input type="hidden" id="id" value="${principal.user.id}"/>
 
         <div class="form-group">
             <label for="username">UserName:</label>

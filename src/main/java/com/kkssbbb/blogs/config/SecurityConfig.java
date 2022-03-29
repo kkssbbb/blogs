@@ -20,14 +20,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //우 세개 어노테이션은 시큐리티 에서 세트 어노테이션
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+     private PrincipalDetailService principalDetailService;
+
     @Bean
     @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception{
+    public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
-    @Autowired
-     private PrincipalDetailService principalDetailService;
 
     @Bean //Ioc
     public BCryptPasswordEncoder encoderPWD(){

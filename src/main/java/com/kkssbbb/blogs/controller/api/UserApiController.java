@@ -1,5 +1,6 @@
 package com.kkssbbb.blogs.controller.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kkssbbb.blogs.config.auth.PrincipalDetail;
 import com.kkssbbb.blogs.dto.ResponseDto;
 import com.kkssbbb.blogs.model.RoleType;
@@ -20,13 +21,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 @RestController
+@JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
 public class UserApiController {
 
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+
 
     @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> save(@RequestBody User user) { //username, password , email
@@ -44,15 +45,12 @@ public class UserApiController {
             //여기서는 트랜잭션이 종료되기 때문에 DB에 값은 변경 됐음
             //하지만 세션값은 변경되지 않은 상태이기 때문에 우리가 직접 세션값을 변경해줄 것임.
 
-        //세션등록
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return new ResponseDto<Integer>(HttpStatus.OK.value()  ,1);
+
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
         }
 
     }
-
 
 
 //    @PostMapping("/api/user/login")

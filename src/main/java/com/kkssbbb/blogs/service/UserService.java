@@ -16,6 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class UserService {
 
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
     @Autowired  //DI를 해준다.
     private UserRepository userRepository;
 
@@ -41,14 +44,17 @@ public class UserService {
         // select를 해서 User오브젝트를 DB로 부터 가져오는 이유는 영속화를 하기 위해서
         // 영속화된 오브젝트를 변경하면 자동으로 DB에 update문을 날려주거든요.
         User persistance = userRepository.findById(user.getId()).orElseThrow(()->{
-           return new IllegalArgumentException("회원 찾기 실패");
+            return new IllegalArgumentException("회원 찾기 실패");
         });
         String rawPassword = user.getPassword();
-        String encPaassword = encoder.encode(rawPassword);
-        persistance.setPassword(encPaassword);
+        String encPassword = encoder.encode(rawPassword);
+        persistance.setPassword(encPassword);
         persistance.setEmail(user.getEmail());
 
 
+        //세션등록
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
 
         //회원수정 함수 종료시 = 서비스 조료 = 트랜잭션 종료 = commit 이 자동으로 됩니다.
         //영속화된 persistance 객체의 변화가 감지되면 더티체킹이 되어 update문을 날려준다.

@@ -1,10 +1,12 @@
 package com.kkssbbb.blogs.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -20,8 +22,12 @@ import java.sql.Timestamp;
 //@DynamicInsert : insert시에 null인 필드를 제외시켜준다.
 public class User {
 
+
+
     @Id  //Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) //프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
+
+
     private  int id; //시퀸스,auto_increment
 
     @Column(nullable = false,length =30) //null값은 될수없음 30자 까지
@@ -40,4 +46,6 @@ public class User {
 
     @CreationTimestamp
     private Timestamp createData;
+
+
 }
