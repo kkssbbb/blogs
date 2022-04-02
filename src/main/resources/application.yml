@@ -25,7 +25,7 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: update # hibernate를 사용해서 DDL을 생성하기 위함
+      ddl-auto: update # hibernate를 사용해서 DDL을 생성하기 위함 ,create = 서버 재구동시 db정보 새로시작
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl #PhysicalNamingStrategyStandardImpl : ??? ??? ??? ???? ??
       use-new-id-generator-mappings: false # jpa? ?? ?? ??? ???? ?? (strategy = GenerationType.IDENTITY) //IDENTITY : ?????? ??? DB? ??? ??? ????.
@@ -36,3 +36,7 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+
+cos:
+  key: cos1234 #중요한키 노출되면 안 됌  ,카카오 로그인을 할 때 회원들의 비밀번호를 cos1234로 통일

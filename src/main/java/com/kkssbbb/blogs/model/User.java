@@ -30,7 +30,7 @@ public class User {
 
     private  int id; //시퀸스,auto_increment
 
-    @Column(nullable = false,length =30) //null값은 될수없음 30자 까지
+    @Column(nullable = false,length =100, unique = true) //null값은 될수없음 30자 까지
     private String username; // 아이디
 
     @Column(nullable = false, length = 100)
@@ -43,6 +43,8 @@ public class User {
     //db에는 RoleType이란게 없기 때문에 아래와같이 이넘타입이 스트링이란걸 알려준다.
     @Enumerated(EnumType.STRING)
     private  RoleType role; // Enum을 쓰는게 좋다. //
+
+    private String oauth; // kakao, google
 
     @CreationTimestamp
     private Timestamp createData;
