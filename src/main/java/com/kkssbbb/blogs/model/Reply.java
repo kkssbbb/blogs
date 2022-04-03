@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 @Data
@@ -24,7 +25,6 @@ public class Reply {
     @Column(nullable = false, length = 200)
     private String content;
 
-
     @ManyToOne
     @JoinColumn(name = "boardId")
     private Board board;
@@ -34,5 +34,5 @@ public class Reply {
     private  User user;
 
     @CreationTimestamp
-    private Timestamp timestamp;
+    private LocalDateTime createData;
 }

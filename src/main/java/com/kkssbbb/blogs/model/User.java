@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 @Data
@@ -47,7 +48,7 @@ public class User {
     private String oauth; // kakao, google
 
     @CreationTimestamp
-    private Timestamp createData;
+    private LocalDateTime createData;
 
 
 }
