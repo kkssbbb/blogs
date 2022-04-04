@@ -3,6 +3,7 @@ package com.kkssbbb.blogs.controller.api;
 import com.kkssbbb.blogs.config.auth.PrincipalDetail;
 import com.kkssbbb.blogs.dto.ResponseDto;
 import com.kkssbbb.blogs.model.Board;
+import com.kkssbbb.blogs.model.Reply;
 import com.kkssbbb.blogs.model.User;
 import com.kkssbbb.blogs.service.BoardService;
 import com.kkssbbb.blogs.service.UserService;
@@ -39,6 +40,14 @@ public class BoardApiController {
     return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
+    @PostMapping("/api/board/{boardId}/reply")
+    public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
+
+
+        boardService.댓글쓰기(principal.getUser(), boardId, reply);
+        return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+
+    }
 }
 
 

@@ -40,6 +40,7 @@ public class Board {
 
     @OneToMany(mappedBy = "board",fetch = FetchType.EAGER) //mappedBy : 연관관계의 주인이아니다.(FK(외래키)가아니라는 소리로 db에 컬럼을 만들지 ㅁ마세요라는 뜻)
     @JsonIgnoreProperties({"board"}) //무한참조 방지를위한 어노테이션
+    @OrderBy("id desc") //내림차 순 정렬
     private List<Reply> replys ;   // Reply클래스의  (mappedBy = "board") 를 폴링키로 사용
 
     @CreationTimestamp

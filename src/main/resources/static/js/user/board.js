@@ -10,6 +10,9 @@ let index={
         $("#btn-update").on("click", () =>{ /*.on("click",여기 엔 이러나는 이벤트*/
             this.update();
         });
+        $("#btn-reply-save").on("click", () =>{ /*.on("click",여기 엔 이러나는 이벤트*/
+            this.replySave();
+        });
     },
      //위의 세이브 버튼을 클릭하면 밑의 세이브함수가 호출된다
      save: function () {
@@ -75,7 +78,27 @@ let index={
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    }
+    },
+    replySave: function(){
+        let data = {
+            userId: $("#userId").val(),
+            boardId: $("#boardId").val(),
+            content: $("#reply-content").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: `/api/board/${data.boardId}/reply`,
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        }).done(function(resp){
+            alert("댓글작성이 완료되었습니다.");
+            location.href = `/board/${data.boardId}`;
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
 }
 //회원 가입시 Ajax를 사용하는 2가지 이유
 //1. 요청에 대한 응답을 html 이 아닌 Data(json)을 받기위해서
