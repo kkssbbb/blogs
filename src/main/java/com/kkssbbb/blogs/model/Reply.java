@@ -1,5 +1,6 @@
 package com.kkssbbb.blogs.model;
 
+import com.kkssbbb.blogs.dto.ReplySaveRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,4 +36,5 @@ public class Reply {
 
     @CreationTimestamp
     private LocalDateTime createData;
+
 }

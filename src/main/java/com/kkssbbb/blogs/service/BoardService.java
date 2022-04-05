@@ -1,5 +1,6 @@
 package com.kkssbbb.blogs.service;
 
+import com.kkssbbb.blogs.dto.ReplySaveRequestDto;
 import com.kkssbbb.blogs.model.Board;
 import com.kkssbbb.blogs.model.Reply;
 import com.kkssbbb.blogs.model.RoleType;
@@ -25,6 +26,9 @@ public class BoardService {
 
     @Autowired
     private ReplyRepository replyRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
 
     @Transactional // : 1트랜잭션 관리, 2서비스 의미 때문 :ex 한번에 두개의 트랜잭션션을 관할 수 있다
@@ -66,17 +70,25 @@ public class BoardService {
     }
 
     @Transactional
-    public void 댓글쓰기(User user, int boardId, Reply requestReply) {
+    public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
 
-        Board board = boardRepository.findById(boardId)
+        User user = userRepository.findById(replySaveRequestDto.getUserId())
+                .orElseThrow(()->{
+                    return new IllegalArgumentException("댓글 찾기 실패 : 유저 아이디를 찾을 수 없습니다.");
+                }); //영속화 완료료
+
+        Board board = boardRepository.findById(replySaveRequestDto.getBoardId())
                 .orElseThrow(()->{
                     return new IllegalArgumentException("댓글 찾기 실패 : 게시글 아이디를 찾을 수 없습니다.");
                 }); //영속화 완료료
 
-        requestReply.setUser(user);
-        requestReply.setBoard(board);
+        Reply reply = new Reply().builder()
+                .user(user)
+                .board(board)
+                .content(replySaveRequestDto.getContent())
+                .build();
 
-        replyRepository.save(requestReply);
+        replyRepository.save(reply);
     }
 
     }

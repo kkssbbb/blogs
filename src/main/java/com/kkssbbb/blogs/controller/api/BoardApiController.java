@@ -1,6 +1,7 @@
 package com.kkssbbb.blogs.controller.api;
 
 import com.kkssbbb.blogs.config.auth.PrincipalDetail;
+import com.kkssbbb.blogs.dto.ReplySaveRequestDto;
 import com.kkssbbb.blogs.dto.ResponseDto;
 import com.kkssbbb.blogs.model.Board;
 import com.kkssbbb.blogs.model.Reply;
@@ -40,11 +41,12 @@ public class BoardApiController {
     return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
 
+    //데이터를 받을 때 컨트롤러에서 dto를 만들어서 받는게 좋다. ->데이터가 많지않으면 상관없지만 데이터가 많으면 모델로 데이터를 받는건 좋은 방법이 아니다.
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) {
+    public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto) {
 
 
-        boardService.댓글쓰기(principal.getUser(), boardId, reply);
+        boardService.댓글쓰기(replySaveRequestDto);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 
     }
