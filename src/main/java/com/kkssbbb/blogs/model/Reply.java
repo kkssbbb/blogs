@@ -37,4 +37,14 @@ public class Reply {
     @CreationTimestamp
     private LocalDateTime createData;
 
+    @Override
+    public String toString() {
+        return "Reply{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", board=" + board +
+                ", user=" + user +
+                ", createData=" + createData +
+                '}';
+    }
 }
