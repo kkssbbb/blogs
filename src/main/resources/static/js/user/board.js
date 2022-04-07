@@ -101,6 +101,20 @@ let index={
             alert(JSON.stringify(error));
         });
     },
+
+
+    replyDelete: function(boardId,replyId){
+        $.ajax({
+            type: "DELETE",
+            url: `/api/board/${boardId}/reply/${replyId}`,
+            dataType: "json"
+        }).done(function(resp){
+            alert("댓글삭제가 완료되었습니다.");
+            location.href = `/board/${boardId}`;
+        }).fail(function(error){
+            alert(JSON.stringify(error));
+        });
+    },
 }
 //회원 가입시 Ajax를 사용하는 2가지 이유
 //1. 요청에 대한 응답을 html 이 아닌 Data(json)을 받기위해서
